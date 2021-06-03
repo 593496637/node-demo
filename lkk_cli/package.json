@@ -1,19 +1,18 @@
 {
-  "name": "2.npmdemo",
+  "name": "lkk_cli",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "bin": {
+    "lkk": "index.js"
+  },
   "scripts": {
-    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.21.1"
-  },
-  "devDependencies": {
-    "webpack-cli": "^4.7.0"
+    "commander": "^7.2.0"
   }
 }
