@@ -11,9 +11,11 @@ const createCommands = () => {
 
   program
     .command('addcpn <name>')
-    .description('add vue component,例如：lkk addcpn helloWorld -d src/components')
+    .description(
+      'add vue component,例如：lkk addcpn helloWorld -d src/components'
+    )
     .action((name) => {
-      addComponentAction(name, 'src/components')
+      addComponentAction(name, program.opts().dest || 'src/components')
     })
 }
 
