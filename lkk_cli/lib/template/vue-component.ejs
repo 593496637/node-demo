@@ -1,0 +1,38 @@
+<template>
+  <div class="<%= data.lowerName %>">{{ message }}</div>
+</template>
+
+<script>
+export default {
+  name: '<%= data.name %>',
+  components: {},
+  props: {
+    msg: String
+  },
+  data() {
+    return {
+      message: '<%= data.lowerName %>'
+    }
+  },
+  computed: {},
+  created() {
+
+  },
+  mounted() {
+
+  },
+  beforeDestroy() {
+
+  },
+  destroyed() {
+
+  },
+
+}
+</script>
+
+<style lang='scss' scoped>
+.<%= data.lowerName %> {
+  background: #fff;
+}
+</style>
