@@ -8,7 +8,7 @@ const download = promisify(require('download-git-repo'))
 const { vueRepo } = require('../config/repo-config')
 const { commandSpawn } = require('../utils/terminal')
 
-const { compile, writeToFile } = require('../utils/utils')
+const { compile, writeToFile, createDirSync } = require('../utils/utils')
 
 const createProjectAction = async (project) => {
   console.log('正在clone：', vueRepo)
@@ -31,21 +31,37 @@ const createProjectAction = async (project) => {
 
 // 添加组件的action
 const addComponentAction = async (name, dest) => {
-  // 2.编译ejs模板
+  // 1.编译ejs模板
   let result = await compile('vue-component.ejs', {
     name,
     lowerName: name.toLowerCase(),
   })
 
-  // 3.将result写入到.vue文件中
   const targetPath = path.resolve(dest, `${name}.vue`)
-  console.log(targetPath)
+  // 2.放到对应的文件夹中
   writeToFile(targetPath, result)
 
-  // 4.放到对应的文件夹中
+}
+
+// 3.添加组件和路由
+const addPageAndRoute = async (name, dest) => {
+  //1. 编译ejs模板
+  const data = { name, lowerName: name.toLowerCase() }
+  const pageResult = await compile('vue-component.ejs', data)
+  const routeResult = await compile('vue-router.ejs', data)
+
+  // 写入文件
+  const targetPagePath = path.resolve(dest, `${name}.vue`)
+  const targetRoutePath = path.resolve(dest, `router.js`)
+
+  writeToFile(targetPagePath, pageResult)
+  writeToFile(targetRoutePath, routeResult)
+
+
 }
 
 module.exports = {
   createProjectAction,
   addComponentAction,
+  addPageAndRoute
 }

@@ -20,6 +20,19 @@ const compile = (templateName, data) => {
   })
 }
 
+// 递归新增文件夹
+const createDirSync = (dirName) => {
+  if (fs.existsSync(dirName)) {
+    return true
+  } else {
+    if (createDirSync(fs.dirname(dirName))) {
+      fs.mkdirSync(dirName)
+      return true
+    }
+  }
+}
+
+
 // 写入文件
 const writeToFile = (path, content) => {
   return fs.promises.writeFile(path, content)
@@ -27,5 +40,6 @@ const writeToFile = (path, content) => {
 
 module.exports = {
   compile,
-  writeToFile
+  writeToFile,
+  createDirSync
 }

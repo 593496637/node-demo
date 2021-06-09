@@ -1,6 +1,6 @@
 const program = require('commander')
 
-const { createProjectAction, addComponentAction } = require('./actions')
+const { createProjectAction, addComponentAction, addPageAndRoute } = require('./actions')
 
 // 创建指令
 const createCommands = () => {
@@ -16,6 +16,13 @@ const createCommands = () => {
     )
     .action((name) => {
       addComponentAction(name, program.opts().dest || 'src/components')
+    })
+
+  program
+    .command('addpage <page>')
+    .description('add vue page and router config,例如：lkk addpage Home [-d src/pages]')
+    .action((page) => {
+      addPageAndRoute(page, program.opts().dest || 'src/pages')
     })
 }
 
