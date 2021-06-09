@@ -11,7 +11,7 @@ const compile = (templateName, data) => {
   return new Promise((resolve, reject) => {
     ejs.renderFile(templatePath, { data }, {}, (err, result) => {
       if (err) {
-        console.log(err);
+        console.log(err)
         reject(err)
         return
       }
@@ -25,13 +25,12 @@ const createDirSync = (dirName) => {
   if (fs.existsSync(dirName)) {
     return true
   } else {
-    if (createDirSync(fs.dirname(dirName))) {
+    if (createDirSync(path.dirname(dirName))) {
       fs.mkdirSync(dirName)
       return true
     }
   }
 }
-
 
 // 写入文件
 const writeToFile = (path, content) => {
@@ -41,5 +40,5 @@ const writeToFile = (path, content) => {
 module.exports = {
   compile,
   writeToFile,
-  createDirSync
+  createDirSync,
 }

@@ -40,7 +40,6 @@ const addComponentAction = async (name, dest) => {
   const targetPath = path.resolve(dest, `${name}.vue`)
   // 2.放到对应的文件夹中
   writeToFile(targetPath, result)
-
 }
 
 // 3.添加组件和路由
@@ -51,17 +50,17 @@ const addPageAndRoute = async (name, dest) => {
   const routeResult = await compile('vue-router.ejs', data)
 
   // 写入文件
-  const targetPagePath = path.resolve(dest, `${name}.vue`)
-  const targetRoutePath = path.resolve(dest, `router.js`)
+  if (createDirSync(dest)) {
+    const targetPagePath = path.resolve(dest, `${name}.vue`)
+    const targetRoutePath = path.resolve(dest, `router.js`)
 
-  writeToFile(targetPagePath, pageResult)
-  writeToFile(targetRoutePath, routeResult)
-
-
+    writeToFile(targetPagePath, pageResult)
+    writeToFile(targetRoutePath, routeResult)
+  }
 }
 
 module.exports = {
   createProjectAction,
   addComponentAction,
-  addPageAndRoute
+  addPageAndRoute,
 }
