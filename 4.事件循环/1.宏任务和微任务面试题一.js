@@ -1,5 +1,5 @@
 // 1.JavaScript
-// 2.微任务 process.nextTick、MutationObserver、promise.then catch finally
+// 2.微任务 process.nextTick、MutationObserver、promise.then catch finally、queueMicrotask
 // 3.宏任务 I/O、setTimeout、setInterval、setImmediate、requestAnimationFrame
 
 setTimeout(() => {
