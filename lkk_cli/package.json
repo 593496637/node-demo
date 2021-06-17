@@ -1,17 +1,27 @@
 {
-  "name": "lkk_cli",
-  "version": "1.0.0",
+  "name": "lkkvue",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "bin": {
-    "lkk": "index.js"
+    "lkkvue": "index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "lkkvue",
+    "lkk",
+    "vue",
+    "cli"
+  ],
+  "author": "lkk",
+  "license": "MIT",
+  "homepage": "https://gitee.com/likkstar/hy-vue-temp.git",
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/likkstar/hy-vue-temp.git"
+  },
   "dependencies": {
     "commander": "^7.2.0",
     "download-git-repo": "^3.0.2",
