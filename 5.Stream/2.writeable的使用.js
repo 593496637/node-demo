@@ -8,7 +8,8 @@ const fs = require('fs')
 // Stream 方式写入
 const writer = fs.createWriteStream('./bar.txt', {
   flags: "a", //a 的时候start不生效
-  start: 4
+  start: 4,
+  end:4
 })
 
 writer.write('你好啊', err => {
