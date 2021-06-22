@@ -3,12 +3,10 @@ const { URL, URLSearchParams } = require('url')
 
 // 创建一个web服务器
 const server = http.createServer((req, res) => {
-  const myURL = new URL(req.url, `http://${req.headers.host}`)
-  const { pathname, searchParams } = myURL
-
   if (pathname === '/login') {
     if (req.method === 'POST') {
       // 拿到body中的数据
+      
       req.setEncoding('utf-8')
       req.on('data', (data) => {
         const { username, password } = JSON.parse(data)
