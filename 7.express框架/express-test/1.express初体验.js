@@ -1,5 +1,7 @@
 const express = require('express')
 
+
+// express其实是一个函数：createApplication
 // 创建服务器
 const app = express()
 
