@@ -1,7 +1,7 @@
 const path = require('path')
 
 const basePath = 'user/kk'
-const filename = 'abc.txt'
+const filename = 'a/abc.txt'
 
 // 路径拼接
 const filePath = path.resolve(basePath, filename)
