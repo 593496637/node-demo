@@ -1,0 +1,6 @@
+{
+  "name": "mysql",
+  "dependencies": {
+    "mysql2": "^2.2.5"
+  }
+}
