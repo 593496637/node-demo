@@ -1,21 +1,26 @@
-const { message } = require('statuses');
 const errorTypes = require('../constants/error-types')
 const errorHandler = (error, ctx) => {
-  console.log('错误：', error.message);
-
+  let status, message
   switch (error.message) {
     case errorTypes.NAME_OR_PASSWORD_IS_REQUIRED:
-      status = 404
+      status = 400
       message = '用户名密码不能为空'
       break;
-
+    case errorTypes.USER_ALREADY_EXISTS:
+      status = 409
+      message = '用户已存在'
+      break;
     default:
       status = 404
+      message = 'NOT FOUND'
       break;
   }
 
-  ctx.status = 404
-  ctx.body = '错误'
+  ctx.status = status
+  ctx.body = {
+    code: status,
+    message
+  }
 }
 
 module.exports = errorHandler
