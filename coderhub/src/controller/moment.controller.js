@@ -29,7 +29,24 @@ class MomentController {
     ctx.body = result
   }
 
+  // 修改
+  async update(ctx, next) {
+    // 1.获取参数
+    const { momentId } = ctx.params
+    const { content } = ctx.request.body
 
+    // 2.修改moment
+    const result = await momentService.update(content, momentId)
+
+    ctx.body = result
+  }
+
+  // 删除
+  async remove(ctx, next) {
+    const { momentId } = ctx.params
+    const result = await momentService.remove(momentId)
+    ctx.body = result
+  }
 }
 
 module.exports = new MomentController()
