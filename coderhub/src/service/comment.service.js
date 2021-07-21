@@ -32,7 +32,6 @@ class CommentService {
   async getCommentsByMomentId(momentId) {
     const statement = `SELECT * FROM comment WHERE moment_id=?;`
     const [result] = await connection.execute(statement, [momentId])
-    console.log(result);
     return result
   }
 }

@@ -33,9 +33,8 @@ class commentController {
 
   async list(ctx, next) {
     const { momentId } = ctx.query
-    console.log(momentId);
     const result = await service.getCommentsByMomentId(momentId)
-    return result
+    ctx.body = result
   }
 
 }
