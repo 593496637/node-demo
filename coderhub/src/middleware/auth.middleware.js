@@ -50,14 +50,18 @@ const verifyAuth = async (ctx, next) => {
   }
 }
 
+// 权限验证 --
 const verifyPermission = async (ctx, next) => {
   // 1.获取参数
-  const { momentId } = ctx.params
+  const [resourceKey] = Object.keys(ctx.params)
+  const tableName = resourceKey.replace('Id', '')
+  const resourceId = ctx.params[resourceKey]
+
   const { id } = ctx.user
 
   // 2.查询是否具备权限
   try {
-    const isPermission = await authService.checkMoment(momentId, id)
+    const isPermission = await authService.checkPermission(tableName, resourceId, id)
     if (!isPermission) throw new Error()
     await next()
   } catch (err) {
@@ -65,6 +69,25 @@ const verifyPermission = async (ctx, next) => {
     return ctx.app.emit('error', error, ctx)
   }
 }
+
+// 权限验证 -- 另一个思路：封装到一个闭包，在router的中间件里调用
+// const verifyPermission = (tableName) => {
+//   return async (ctx, next) => {
+//     // 1.获取参数
+//     const { momentId } = ctx.params
+//     const { id } = ctx.user
+
+//     // 2.查询是否具备权限
+//     try {
+//       const isPermission = await authService.checkPermission(tableName, momentId, id)
+//       if (!isPermission) throw new Error()
+//       await next()
+//     } catch (err) {
+//       const error = new Error(errorTypes.UNPERMISSION)
+//       return ctx.app.emit('error', error, ctx)
+//     }
+//   }
+// }
 
 module.exports = {
   verifyLogin,

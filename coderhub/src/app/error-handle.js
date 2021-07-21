@@ -24,7 +24,7 @@ const errorHandler = (error, ctx) => {
       break;
     case errorTypes.UNPERMISSION:
       status = 401
-      message = '权限不足'
+      message = '权限不足或未查询到数据'
       break;
     default:
       status = 404
