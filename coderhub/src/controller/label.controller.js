@@ -10,6 +10,12 @@ class LabelController {
       ctx.body = error
     }
   }
+
+  async list(ctx, next) {
+    const { page_num, page_size } = ctx.query
+    const result = await service.getLabels(page_num, page_size)
+    ctx.body = result
+  }
 }
 
 module.exports = new LabelController()
