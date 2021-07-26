@@ -36,11 +36,11 @@ class MomentService {
     const statement = `
     SELECT 
       m.id id,m.content content,m.createAt createTime,m.updateAt updateTime,
-      IF(COUNT(u.id),JSON_OBJECT('id',u.id,'name',u.name),JSON_ARRAY()) author,
+      IF(COUNT(u.id),JSON_OBJECT('id',u.id,'name',u.name,'avatarUrl',u.avatar_url),JSON_ARRAY()) author,
       IF(COUNT(l.id),JSON_ARRAYAGG(JSON_OBJECT('id',l.id,'name',l.name,'time',DATE_FORMAT(l.createAT,'%Y-%c-%d %H:%i:%s'))) ,JSON_ARRAY()) labels,
       (SELECT IF(COUNT(c.id),JSON_ARRAYAGG(
         JSON_OBJECT('id',c.id,'content',c.content,'commentId',c.comment_id,'createTime',DATE_FORMAT(c.createAt,'%Y-%c-%d %H:%i:%s'),
-                    'user',JSON_OBJECT('id',cu.id,'name',cu.name))
+                    'user',JSON_OBJECT('id',cu.id,'name',cu.name,'avatarUrl',u.avatar_url))
         ),JSON_ARRAY()) FROM comment c
                         LEFT JOIN user cu ON c.user_id = cu.id
                         WHERE m.id = c.moment_id) comments
