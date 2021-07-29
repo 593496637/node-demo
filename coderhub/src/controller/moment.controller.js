@@ -1,4 +1,7 @@
+const fs = require('fs')
+const { PICTURE_PATH } = require('../constants/file-path')
 const momentService = require('../service/moment.service')
+const fileService = require('../service/file.service')
 class MomentController {
   async create(ctx, next) {
     // 1.获取数据(user_id,content,图片)
@@ -64,6 +67,20 @@ class MomentController {
     }
 
     ctx.body = '添加标签成功'
+  }
+
+  async fileInfo(ctx, next) {
+    let { filename } = ctx.params
+    const { type } = ctx.query
+
+    const fileInfo = await fileService.getFileByFilename(filename)
+    const types = ['large', 'middle', 'small']
+    if (types.some(item => item === type)) {
+      filename = filename + '-' + type
+    }
+    ctx.response.set('content-type', fileInfo.mimetype)
+    ctx.body = fs.createReadStream(`${PICTURE_PATH}/${filename}`)
+
   }
 }
 

@@ -43,7 +43,8 @@ class MomentService {
                     'user',JSON_OBJECT('id',cu.id,'name',cu.name,'avatarUrl',u.avatar_url))
         ),JSON_ARRAY()) FROM comment c
                         LEFT JOIN user cu ON c.user_id = cu.id
-                        WHERE m.id = c.moment_id) comments
+                        WHERE m.id = c.moment_id) comments,
+      (SELECT JSON_ARRAYAGG(CONCAT('http://localhost:8000/moment/images/',file.filename)) FROM file WHERE m.id = file.moment_id) images
     FROM moment m
     LEFT JOIN user u ON m.user_id = u.id  
 
@@ -81,7 +82,7 @@ class MomentService {
   async addLabel(momentId, labelId) {
     const statement = `INSERT INTO moment_label (moment_id,label_id) VALUES (?,?)`
     const [result] = await connection.execute(statement, [momentId, labelId])
-    return result
+    return result[0]
   }
 }
 

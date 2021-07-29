@@ -21,6 +21,25 @@ class FileController {
     }
 
   }
+
+  async savePictureInfo(ctx, next) {
+    // 获取图像信息
+    const files = ctx.req.files
+    const { id } = ctx.user
+    const { momentId } = ctx.query
+    // 将图像信息保存到数据库
+    try {
+      for (const file of files) {
+        const { filename, mimetype, size } = file
+        await fileService.createFile(filename, mimetype, size, id, momentId)
+      }
+      ctx.body = '上传完成'
+    } catch (error) {
+      ctx.body = '上传失败'
+    }
+
+
+  }
 }
 
 module.exports = new FileController()
