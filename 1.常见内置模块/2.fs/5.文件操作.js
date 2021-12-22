@@ -74,3 +74,6 @@ const fs = require('fs')
 //   })
 // })
 
+
+// 同步查看
+fs.accessSync('./')
