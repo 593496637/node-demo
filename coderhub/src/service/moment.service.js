@@ -17,7 +17,7 @@ class MomentService {
   }
 
   // 动态列表
-  async getMomentList(offset, size) {
+  async getMomentList(offset = "0", size = "10") {
     const statement = `
       SELECT 
         m.id id,m.content content,m.createAt createTime,m.updateAt updateTime,

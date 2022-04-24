@@ -5,16 +5,16 @@ const app = new Koa()
 
 const testRouter = new Router()
 
-testRouter.get('/test', (ctx, next) => {
+testRouter.get('/setCookie', (ctx, next) => {
   ctx.cookies.set('name', 'lily', {
     maxAge: 50 * 1000
   })
-  ctx.body = 'test'
+  ctx.body = '设置cookie'
 })
 
-testRouter.get('/demo', (ctx, next) => {
+testRouter.get('/getCookie', (ctx, next) => {
   const cookie = ctx.cookies.get('name')
-  ctx.body = `cookie:${cookie}`
+  ctx.body = `获取cookie:${cookie}`
 })
 
 app.use(testRouter.routes())

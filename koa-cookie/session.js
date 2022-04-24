@@ -9,14 +9,14 @@ const testRouter = new Router()
 // 创建Session配置
 const session = Session({
   key: 'sessionId',
-  maxAge: 10 * 1000,
-  signed: true
+  maxAge: 10 * 1000,//cookie的有效期
+  signed: true //sha256的签名，防止cookie被篡改
 }, app)
 app.keys = ['aaa']
 app.use(session)
 
 
-testRouter.get('/test', (ctx, next) => {
+testRouter.get('/setSession', (ctx, next) => {
 
   const id = 10;
   const name = 'abc'
@@ -25,7 +25,7 @@ testRouter.get('/test', (ctx, next) => {
   ctx.body = 'test-session'
 })
 
-testRouter.get('/demo', (ctx, next) => {
+testRouter.get('/getSession', (ctx, next) => {
   console.log(ctx.session.user);
   ctx.body = 'session'
 })
